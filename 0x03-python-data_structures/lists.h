@@ -13,8 +13,8 @@
  */
 typedef struct listint_s
 {
-    int n;
-    struct listint_s *next;
+int n;
+struct listint_s *next;
 } listint_t;
 
 int is_palindrome(listint_t **head);

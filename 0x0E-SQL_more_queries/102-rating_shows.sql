@@ -1,9 +1,15 @@
--- Use the hbtn_0d_tvshows_rate database.
-USE hbtn_0d_tvshows_rate;
+-- Selects the title of shows and their total rating from the tv_shows table
+-- by joining with the tv_show_ratings table on show_id.
+-- The result is grouped by show title and ordered by descending rating.
 
--- Select all shows by their rating sum.
-SELECT tv_shows.title, SUM(tv_show_ratings.rating) AS rating
-FROM tv_shows
-LEFT JOIN tv_show_ratings ON tv_shows.id = tv_show_ratings.tv_show_id
-GROUP BY tv_shows.title
-ORDER BY rating DESC;
+SELECT `title`, SUM(`rate`) AS `rating`
+FROM `tv_shows` AS t
+
+-- Joins the tv_shows table with the tv_show_ratings table on show_id.
+INNER JOIN `tv_show_ratings` AS r ON t.`id` = r.`show_id`
+
+-- Groups the result set by show title.
+GROUP BY `title`
+
+-- Orders the result set by descending total rating.
+ORDER BY `rating` DESC;

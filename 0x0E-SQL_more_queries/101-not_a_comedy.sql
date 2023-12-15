@@ -1,13 +1,23 @@
--- Use the hbtn_0d_tvshows database.
-USE hbtn_0d_tvshows;
+-- Selects distinct show titles from the tv_shows table
+-- for shows without the comedy genre, ordered by ascending show title.
 
--- Select all shows without the genre Comedy.
-SELECT DISTINCT tv_shows.title
-FROM tv_shows
-WHERE tv_shows.id NOT IN (
-    SELECT tv_show_genres.tv_show_id
-    FROM tv_show_genres
-    JOIN tv_genres ON tv_show_genres.genre_id = tv_genres.id
-    WHERE tv_genres.name = 'Comedy'
+SELECT DISTINCT `title`
+FROM `tv_shows` AS t
+
+-- Left joins the tv_show_genres table on show_id
+-- and then left joins the resulting table with the tv_genres table on genre_id.
+LEFT JOIN `tv_show_genres` AS s ON s.`show_id` = t.`id`
+LEFT JOIN `tv_genres` AS g ON g.`id` = s.`genre_id`
+
+-- Filters out shows associated with the comedy genre
+-- by using a subquery with the NOT IN clause.
+WHERE t.`title` NOT IN (
+    SELECT `title`
+    FROM `tv_shows` AS t
+    INNER JOIN `tv_show_genres` AS s ON s.`show_id` = t.`id`
+    INNER JOIN `tv_genres` AS g ON g.`id` = s.`genre_id`
+    WHERE g.`name` = "Comedy"
 )
-ORDER BY tv_shows.title;
+
+-- Orders the result set by ascending show title.
+ORDER BY `title`;

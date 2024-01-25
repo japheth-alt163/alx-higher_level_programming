@@ -1,4 +1,3 @@
 #!/bin/bash
-# This script takes a URL, sends a request using curl in silent mode, and displays the size of the response body in bytes
-
-curl -s "$1" | wc -c
+# send a request to an URL with curl, and displays the size of the body of the response
+curl -vs "$1" 2>&1 | wc -c

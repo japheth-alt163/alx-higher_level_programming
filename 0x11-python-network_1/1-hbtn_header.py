@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Takes a URL as a command-line argument, sends a request, and displays the X-Request-Id value in the response header.
+Takes a URL as a command-line argument, sends a request,
 """
 
 import urllib.request
